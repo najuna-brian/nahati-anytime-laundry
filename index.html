@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nahati Anytime Laundry</title>
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="container">
+        <h1>Welcome to Nahati Anytime Laundry</h1>
+        <p class="tagline">Washing is a basic need, not a luxury</p>
+        <a href="#booking" class="cta-button">Schedule a Laundry Pickup Now!</a>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About Us</h2>
+        <p>
+          At Nahati Anytime Laundry, we provide professional 24/7 laundry
+          services across Kampala. Whether it's clothes, bedding, suits, or
+          shoes — we pick, clean, and deliver on time.
+        </p>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section alt-bg">
+      <div class="container">
+        <h2>Our Services</h2>
+        <ul>
+          <li>✔ Wash, Dry & Fold (5,000 UGX per Kg)</li>
+          <li>✔ Express Laundry (8,000 UGX per Kg)</li>
+          <li>✔ Special Garment Cleaning</li>
+          <li>✔ Shoe Cleaning (5,000 UGX per pair)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+      <div class="container">
+        <h2>Pricing</h2>
+        <p>
+          We charge by weight for most laundry services. Pricing includes pickup
+          and delivery.
+        </p>
+        <ul>
+          <li><strong>Normal Wash:</strong> 5,000 UGX/Kg</li>
+          <li><strong>Express Service:</strong> 8,000 UGX/Kg</li>
+          <li><strong>Shoes:</strong> 5,000 UGX/pair</li>
+          <li><strong>Special Garments:</strong> Price varies</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section id="booking" class="section alt-bg">
+      <div class="container">
+        <h2>Schedule a Laundry Pickup</h2>
+        <form
+          name="laundry-booking"
+          method="POST"
+          data-netlify="true"
+          class="booking-form"
+        >
+          <input type="hidden" name="form-name" value="laundry-booking" />
+
+          <input
+            type="text"
+            name="Full Name"
+            placeholder="Full Name"
+            required
+          />
+          <input
+            type="tel"
+            name="Phone Number"
+            placeholder="Phone Number"
+            required
+          />
+          <input
+            type="text"
+            name="Pick-up Location"
+            placeholder="Pickup Address"
+            required
+          />
+          <input type="date" name="Pickup Date" required />
+          <input type="time" name="Pickup Time" required />
+
+          <select name="Type of Laundry" required>
+            <option disabled selected>Select Laundry Type</option>
+            <option value="Clothes">Clothes</option>
+            <option value="Bedding">Bedding</option>
+            <option value="Suits">Suits</option>
+            <option value="Shoes">Shoes</option>
+          </select>
+
+          <select name="Type of Service" required>
+            <option disabled selected>Select Service</option>
+            <option value="Normal Wash">Normal Wash (5,000 UGX/Kg)</option>
+            <option value="Express">Express (8,000 UGX/Kg)</option>
+            <option value="Special Garment">Special Garment Cleaning</option>
+          </select>
+
+          <input
+            type="number"
+            name="Number of Items"
+            placeholder="Number of Items"
+            min="1"
+            required
+          />
+          <input
+            type="number"
+            name="Weight (Kg)"
+            placeholder="Weight in Kg"
+            step="0.1"
+            min="1"
+            required
+          />
+
+          <button type="submit" class="cta-button">Book Pickup</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
+      <div class="container">
+        <h2>Customer Testimonials</h2>
+        <div class="testimonials">
+          <blockquote>
+            "Super fast and affordable! My clothes were clean and folded better
+            than ever. Highly recommend Nahati!"
+            <footer>– Sarah, Ntinda</footer>
+          </blockquote>
+          <blockquote>
+            "Used their express service and got everything back in 5 hours.
+            Great team and very reliable!"
+            <footer>– James, Bugolobi</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section alt-bg">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <p>Call or WhatsApp us anytime. We’re open 24/7!</p>
+        <ul class="contact-list">
+          <li>
+            <strong>MTN:</strong> <a href="tel:+256394827687">0394 827 687</a>
+          </li>
+          <li>
+            <strong>Airtel/WhatsApp:</strong>
+            <a href="https://wa.me/256200981445" target="_blank"
+              >0200 981 445</a
+            >
+          </li>
+          <li>
+            <strong>Email:</strong>
+            <a href="mailto:nahatico.ltd@gmail.com">nahatico.ltd@gmail.com</a>
+          </li>
+          <li><strong>Instagram:</strong> @nahati_laundry</li>
+        </ul>
+
+        <h3>Our location</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d997.4371697485246!2d32.57025706950905!3d0.3385285410604266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbb19d164ea2d%3A0x46bf437b2b38b7a9!2sNahati%20Anytime%20Laundry!5e0!3m2!1sen!2sug!4v1747937577361!5m2!1sen!2sug" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </iframe>
+      </div>
+    </section>
+  </body>
+</html>

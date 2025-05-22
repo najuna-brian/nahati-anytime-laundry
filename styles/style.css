@@ -1,0 +1,150 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 2rem;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.alt-bg {
+  background-color: #f0f0f0;
+}
+
+h1, h2, h3 {
+  margin-bottom: 1rem;
+  color: #044e54; /* Deep turquoise */
+}
+
+p, li {
+  margin-bottom: 1rem;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(to right, #00c0c7, #005f60);
+  color: white;
+  text-align: center;
+  padding: 6rem 2rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.tagline {
+  font-style: italic;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #ffffff;
+  color: #005f60;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #00c0c7;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Booking Form */
+.booking-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form button {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.booking-form button {
+  background-color: #00c0c7;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.booking-form button:hover {
+  background-color: #005f60;
+}
+
+/* Contact */
+.contact-list {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-list li {
+  margin-bottom: 0.75rem;
+}
+
+.contact-list a {
+  color: #005f60;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-list a:hover {
+  text-decoration: underline;
+}
+
+/* Testimonials */
+.testimonials {
+  display: grid;
+  gap: 2rem;
+}
+
+blockquote {
+  font-style: italic;
+  border-left: 4px solid #00c0c7;
+  padding-left: 1rem;
+  color: #444;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .cta-button {
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  .booking-form {
+    grid-template-columns: 1fr;
+  }
+}
