@@ -1,0 +1,5 @@
+<svg width="100" height="40" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <text x="5" y="30" font-family="Arial" font-size="20" fill="#1a7c80">Nahati</text>
+  <circle cx="85" cy="20" r="10" fill="#34c4b5"/>
+  <path d="M85 15 M10 25 A5 5 0 0 1 5 M85 25 A5 5 0 0 0 10" stroke="#fff" stroke-width="2"/>
+</svg>
