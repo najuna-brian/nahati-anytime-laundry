@@ -3,175 +3,129 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nahati Anytime Laundry</title>
+    <title>Nahati Anytime Laundry - Your Trusted Laundry Partner in Kampala</title>
     <link rel="stylesheet" href="styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="logo">Nahati Anytime Laundry</a>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
     <!-- Hero Section -->
     <header class="hero">
       <div class="container">
         <h1>Welcome to Nahati Anytime Laundry</h1>
-        <p class="tagline">Washing is a basic need, not a luxury</p>
-        <a href="#booking" class="cta-button">Schedule a Laundry Pickup Now!</a>
+        <p class="tagline">Fresh, Clean, and Ready Anytime – Your Laundry, Our Care!</p>
+        <a href="booking.html" class="cta-button">Schedule Your Pickup Today!</a>
+        <a href="https://wa.me/256200981445" class="whatsapp-cta" target="_blank">
+          <i class="fab fa-whatsapp"></i> Chat with Us on WhatsApp
+        </a>
       </div>
     </header>
 
-    <!-- About Section -->
-    <section id="about" class="section">
+    <!-- About Preview Section -->
+    <section id="about-preview" class="section">
       <div class="container">
-        <h2>About Us</h2>
+        <h2>Why Choose Nahati?</h2>
         <p>
-          At Nahati Anytime Laundry, we provide professional 24/7 laundry
-          services across Kampala. Whether it's clothes, bedding, suits, or
-          shoes — we pick, clean, and deliver on time.
+          At Nahati Anytime Laundry, we’re more than just a laundry service – we’re your partner in keeping life fresh
+          and hassle-free. Operating 24/7 across Kampala, we offer convenient pickup and delivery for all your laundry
+          needs, from everyday clothes to delicate garments. Our friendly team uses top-quality detergents to ensure
+          your items are cleaned with care and delivered on time.
         </p>
+        <a href="about.html" class="secondary-cta">Learn More About Us</a>
       </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="section alt-bg">
+    <!-- Services Preview Section -->
+    <section id="services-preview" class="section alt-bg">
       <div class="container">
         <h2>Our Services</h2>
-        <ul>
-          <li>✔ Wash, Dry & Fold (5,000 UGX per Kg)</li>
-          <li>✔ Express Laundry (8,000 UGX per Kg)</li>
-          <li>✔ Special Garment Cleaning</li>
-          <li>✔ Shoe Cleaning (5,000 UGX per pair)</li>
+        <p>From regular washes to specialized cleaning, we’ve got you covered!</p>
+        <ul class="service-list">
+          <li><i class="fas fa-tshirt"></i> Wash, Dry & Fold</li>
+          <li><i class="fas fa-bolt"></i> Express Laundry</li>
+          <li><i class="fas fa-suitcase"></i> Special Garment Cleaning</li>
+          <li><i class="fas fa-shoe-prints"></i> Shoe Cleaning</li>
         </ul>
+        <a href="services.html" class="secondary-cta">Explore All Services</a>
       </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="section">
+    <!-- Call to Action Section -->
+    <section id="cta" class="section">
       <div class="container">
-        <h2>Pricing</h2>
+        <h2>Ready to Get Your Laundry Done?</h2>
         <p>
-          We charge by weight for most laundry services. Pricing includes pickup
-          and delivery.
+          Let us take the hassle out of laundry with our 24/7 service. Schedule a pickup or reach out to us on WhatsApp
+          for quick assistance!
         </p>
-        <ul>
-          <li><strong>Normal Wash:</strong> 5,000 UGX/Kg</li>
-          <li><strong>Express Service:</strong> 8,000 UGX/Kg</li>
-          <li><strong>Shoes:</strong> 5,000 UGX/pair</li>
-          <li><strong>Special Garments:</strong> Price varies</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Booking Form Section -->
-    <section id="booking" class="section alt-bg">
-      <div class="container">
-        <h2>Schedule a Laundry Pickup</h2>
-        <form
-          name="laundry-booking"
-          method="POST"
-          data-netlify="true"
-          class="booking-form"
-        >
-          <input type="hidden" name="form-name" value="laundry-booking" />
-
-          <input
-            type="text"
-            name="Full Name"
-            placeholder="Full Name"
-            required
-          />
-          <input
-            type="tel"
-            name="Phone Number"
-            placeholder="Phone Number"
-            required
-          />
-          <input
-            type="text"
-            name="Pick-up Location"
-            placeholder="Pickup Address"
-            required
-          />
-          <input type="date" name="Pickup Date" required />
-          <input type="time" name="Pickup Time" required />
-
-          <select name="Type of Laundry" required>
-            <option disabled selected>Select Laundry Type</option>
-            <option value="Clothes">Clothes</option>
-            <option value="Bedding">Bedding</option>
-            <option value="Suits">Suits</option>
-            <option value="Shoes">Shoes</option>
-          </select>
-
-          <select name="Type of Service" required>
-            <option disabled selected>Select Service</option>
-            <option value="Normal Wash">Normal Wash (5,000 UGX/Kg)</option>
-            <option value="Express">Express (8,000 UGX/Kg)</option>
-            <option value="Special Garment">Special Garment Cleaning</option>
-          </select>
-
-          <input
-            type="number"
-            name="Number of Items"
-            placeholder="Number of Items"
-            min="1"
-            required
-          />
-          <input
-            type="number"
-            name="Weight (Kg)"
-            placeholder="Weight in Kg"
-            step="0.1"
-            min="1"
-            required
-          />
-
-          <button type="submit" class="cta-button">Book Pickup</button>
-        </form>
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="section">
-      <div class="container">
-        <h2>Customer Testimonials</h2>
-        <div class="testimonials">
-          <blockquote>
-            "Super fast and affordable! My clothes were clean and folded better
-            than ever. Highly recommend Nahati!"
-            <footer>– Sarah, Ntinda</footer>
-          </blockquote>
-          <blockquote>
-            "Used their express service and got everything back in 5 hours.
-            Great team and very reliable!"
-            <footer>– James, Bugolobi</footer>
-          </blockquote>
+        <div class="cta-buttons">
+          <a href="booking.html" class="cta-button">Book a Pickup</a>
+          <a href="https://wa.me/256200981445" class="whatsapp-cta" target="_blank">
+            <i class="fab fa-whatsapp"></i> Contact Us on WhatsApp
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section alt-bg">
+    <!-- Footer -->
+    <footer class="footer">
       <div class="container">
-        <h2>Contact Us</h2>
-        <p>Call or WhatsApp us anytime. We’re open 24/7!</p>
-        <ul class="contact-list">
-          <li>
-            <strong>MTN:</strong> <a href="tel:+256394827687">0394 827 687</a>
-          </li>
-          <li>
-            <strong>Airtel/WhatsApp:</strong>
-            <a href="https://wa.me/256200981445" target="_blank"
-              >0200 981 445</a
-            >
-          </li>
-          <li>
-            <strong>Email:</strong>
-            <a href="mailto:nahatico.ltd@gmail.com">nahatico.ltd@gmail.com</a>
-          </li>
-          <li><strong>Instagram:</strong> @nahati_laundry</li>
-        </ul>
-
-        <h3>Our location</h3>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d997.4371697485246!2d32.57025706950905!3d0.3385285410604266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbb19d164ea2d%3A0x46bf437b2b38b7a9!2sNahati%20Anytime%20Laundry!5e0!3m2!1sen!2sug!4v1747937577361!5m2!1sen!2sug" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </iframe>
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Nahati Anytime Laundry</h3>
+            <p>Your trusted laundry partner in Kampala, available 24/7.</p>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="testimonials.html">Testimonials</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <ul>
+              <li><i class="fas fa-phone"></i> MTN: <a href="tel:+256394827687">0394 827 687</a></li>
+              <li>
+                <i class="fab fa-whatsapp"></i> Airtel/WhatsApp:
+                <a href="https://wa.me/256200981445" target="_blank">0200 981 445</a>
+              </li>
+              <li>
+                <i class="fas fa-envelope"></i> <a href="mailto:nahatico.ltd@gmail.com">nahatico.ltd@gmail.com</a>
+              </li>
+              <li>
+                <i class="fab fa-instagram"></i>
+                <a href="https://instagram.com/nahati_laundry" target="_blank">@nahati_laundry</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="footer-bottom">© 2025 Nahati Anytime Laundry. All Rights Reserved.</p>
       </div>
-    </section>
+    </footer>
+
+    <script src="styles/main.js" defer></script>
   </body>
 </html>

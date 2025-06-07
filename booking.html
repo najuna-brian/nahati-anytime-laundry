@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book a Pickup - Nahati Anytime Laundry</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <a href="index.html" class="logo">Nahati Anytime Laundry</a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Booking Form Section -->
+    <section id="booking" class="section">
+      <div class="container">
+        <h1>Book Your Laundry Pickup – Easy as 1-2-3!</h1>
+        <p>
+          Ready to wave goodbye to laundry stress? Fill out this quick form, and our laundry fairies will swoop in to
+          pick up your clothes at a time that suits you. Whether it’s day or night, we’re here to make your life fresher
+          and cleaner. Let’s get started!
+        </p>
+        <form name="laundry-booking" method="POST" data-netlify="true" class="booking-form">
+          <input type="hidden" name="form-name" value="laundry-booking" />
+          <input type="text" name="Full Name" placeholder="Full Name" required />
+          <input type="tel" name="Phone Number" placeholder="Phone Number" required />
+          <input type="text" name="Pick-up Location" placeholder="Pickup Address" required />
+          <input type="date" name="Pickup Date" required />
+          <input type="time" name="Pickup Time" required />
+          <select name="Type of Laundry" required>
+            <option disabled selected>Select Laundry Type</option>
+            <option value="Clothes">Clothes</option>
+            <option value="Bedding">Bedding</option>
+            <option value="Suits">Suits</option>
+            <option value="Shoes">Shoes</option>
+          </select>
+          <select name="Type of Service" required>
+            <option disabled selected>Select Service</option>
+            <option value="Normal Wash">Normal Wash</option>
+            <option value="Express">Express</option>
+            <option value="Special Garment">Special Garment Cleaning</option>
+          </select>
+          <input type="number" name="Number of Items" placeholder="Number of Items" min="1" required />
+          <input type="number" name="Weight (Kg)" placeholder="Weight in Kg" step="0.1" min="1" required />
+          <button type="submit" class="cta-button">Book My Pickup!</button>
+        </form>
+        <a href="https://wa.me/256200981445" class="whatsapp-cta" target="_blank">
+          <i class="fab fa-whatsapp"></i> Need Help Booking? WhatsApp Us!
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Nahati Anytime Laundry</h3>
+            <p>Your friendly laundry squad in Kampala, here for you 24/7 with a smile!</p>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="testimonials.html">Testimonials</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Contact Us</h3>
+            <ul>
+              <li><i class="fas fa-phone"></i> MTN: <a href="tel:+256394827687">0394 827 687</a></li>
+              <li>
+                <i class="fab fa-whatsapp"></i> Airtel/WhatsApp:
+                <a href="https://wa.me/256200981445" target="_blank">0200 981 445</a>
+              </li>
+              <li>
+                <i class="fas fa-envelope"></i> <a href="mailto:nahatico.ltd@gmail.com">nahatico.ltd@gmail.com</a>
+              </li>
+              <li>
+                <i class="fab fa-instagram"></i>
+                <a href="https://instagram.com/nahati_laundry" target="_blank">@nahati_laundry</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="footer-bottom">© 2025 Nahati Anytime Laundry. All Rights Reserved. Made with 💚 for clean clothes!</p>
+      </div>
+    </footer>
+
+    <script src="styles/main.js" defer></script>
+  </body>
+</html>
