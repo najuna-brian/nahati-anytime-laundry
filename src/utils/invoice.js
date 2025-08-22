@@ -68,7 +68,10 @@ export async function createInvoicePdf({ business, invoice }) {
   doc.line(margin, y, 595 - margin, y)
   y += 20
 
-  // Customer Details
+  // Customer Details (boxed)
+  doc.setDrawColor(230)
+  doc.setLineWidth(1)
+  doc.roundedRect(margin - 6, y - 10, 595 - margin * 2 + 12, 96, 6, 6)
   doc.setFont('helvetica', 'bold').setFontSize(12).setTextColor(0)
   doc.text('Customer Details:', margin, y)
   y += 16
@@ -87,7 +90,10 @@ export async function createInvoicePdf({ business, invoice }) {
   })
   y += 8
 
-  // Service Details
+  // Service Details (boxed)
+  doc.setDrawColor(230)
+  doc.setLineWidth(1)
+  doc.roundedRect(margin - 6, y - 10, 595 - margin * 2 + 12, 116, 6, 6)
   doc.setFont('helvetica', 'bold').setFontSize(12).setTextColor(0)
   doc.text('Service Details:', margin, y)
   y += 16
@@ -108,13 +114,17 @@ export async function createInvoicePdf({ business, invoice }) {
 
   if (invoice.specialInstructions) {
     y += 8
+    // Special Instructions (boxed)
+    const textPreview = doc.splitTextToSize(String(invoice.specialInstructions), 520)
+    const boxHeight = Math.max(56, textPreview.length * 14 + 28)
+    doc.setDrawColor(230)
+    doc.roundedRect(margin - 6, y - 10, 595 - margin * 2 + 12, boxHeight, 6, 6)
     doc.setFont('helvetica', 'bold').setFontSize(12).setTextColor(0)
     doc.text('Special Instructions:', margin, y)
     y += 16
     doc.setFont('helvetica', 'normal').setFontSize(10).setTextColor(50)
-    const text = doc.splitTextToSize(String(invoice.specialInstructions), 520)
-    doc.text(text, margin, y)
-    y += text.length * 14
+    doc.text(textPreview, margin, y)
+    y += textPreview.length * 14
   } else {
     y += 8
   }
@@ -122,29 +132,40 @@ export async function createInvoicePdf({ business, invoice }) {
   // Cost Summary table
   const laundryAmount = Number(invoice.laundryAmount ?? (Number(invoice.weightKg || 0) * Number(invoice.ratePerKg || 0)))
   const pickupFee = Number(invoice.pickupDropoffFee || 0)
-  const totalAmount = Number(invoice.totalAmount ?? (laundryAmount + pickupFee))
+  const otherItems = Array.isArray(invoice.items) ? invoice.items : []
+  const otherTotal = Number(invoice.otherItemsTotal || otherItems.reduce((s, it) => s + Number(it.amount||0), 0))
+  const totalFinal = Number(invoice.totalAmount ?? (laundryAmount + pickupFee + otherTotal))
 
   doc.setFont('helvetica', 'bold').setFontSize(12).setTextColor(0)
   doc.text('Cost Summary:', margin, y)
   y += 10
+
+  const tableBody = [
+    ['Laundry', (laundryAmount).toLocaleString('en-UG')],
+    ...otherItems.filter(it => it && it.name && Number(it.amount) > 0).map(it => [String(it.name), Number(it.amount).toLocaleString('en-UG')]),
+    ...(otherTotal > 0 ? [['Other services total', otherTotal.toLocaleString('en-UG')]] : []),
+    ['Pick up and drop off fee', (pickupFee).toLocaleString('en-UG')],
+    [{ content: 'Total Amount', styles: { fontStyle: 'bold' } }, { content: (Number(totalFinal)).toLocaleString('en-UG'), styles: { fontStyle: 'bold' } }],
+  ]
 
   doc.autoTable({
     startY: y + 6,
     headStyles: { fillColor: brandRGB, halign: 'left' },
     styles: { fontSize: 10 },
     head: [['Description', 'Amount (UGX)']],
-    body: [
-      ['Laundry', (laundryAmount).toLocaleString('en-UG')],
-      ['Pick up and drop off fee', (pickupFee).toLocaleString('en-UG')],
-      [{ content: 'Total Amount', styles: { fontStyle: 'bold' } }, { content: (totalAmount).toLocaleString('en-UG'), styles: { fontStyle: 'bold' } }],
-    ],
+    body: tableBody,
     columnStyles: { 1: { halign: 'right' } },
     margin: { left: margin, right: margin },
   })
 
   const tb = doc.lastAutoTable.finalY || y + 40
+  // Appreciation footer (boxed)
+  doc.setDrawColor(230)
+  doc.roundedRect(margin - 6, tb + 10, 595 - margin * 2 + 12, 48, 6, 6)
+  doc.setFont('helvetica', 'bold').setFontSize(11).setTextColor(0)
+  doc.text('We appreciate your trust.', margin, tb + 28)
   doc.setFont('helvetica', 'normal').setFontSize(10).setTextColor(60)
-  doc.text('Thank you for choosing Nahati Anytime Laundry! We are privileged to serve you 😊', margin, tb + 28)
+  doc.text('Thank you for choosing Nahati Anytime Laundry — Your Anytime Laundry. For any questions, call +256 200 981 445.', margin, tb + 44)
 
   return doc
 }

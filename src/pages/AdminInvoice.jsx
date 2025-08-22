@@ -31,13 +31,20 @@ export default function AdminInvoice() {
   const [invoiceDate, setInvoiceDate] = useState(dayjs().format('YYYY-MM-DD'))
   const [saving, setSaving] = useState(false)
 
+  // Other Services line items
+  const [items, setItems] = useState([{ name: '', amount: 0 }])
+  const otherItemsTotal = useMemo(
+    () => items.reduce((sum, it) => sum + Number(it.amount || 0), 0),
+    [items]
+  )
+
   const laundryAmount = useMemo(
     () => Math.round(Number(weightKg || 0) * Number(ratePerKg || 0)),
     [weightKg, ratePerKg]
   )
   const totalAmount = useMemo(
-    () => Math.round(laundryAmount + Number(pickupDropoffFee || 0)),
-    [laundryAmount, pickupDropoffFee]
+    () => Math.round(laundryAmount + Number(pickupDropoffFee || 0) + otherItemsTotal),
+    [laundryAmount, pickupDropoffFee, otherItemsTotal]
   )
 
   async function handleGenerate() {
@@ -65,6 +72,8 @@ export default function AdminInvoice() {
         specialInstructions,
         laundryAmount,
         pickupDropoffFee,
+        items,
+        otherItemsTotal,
         totalAmount,
       }
 
@@ -90,8 +99,8 @@ export default function AdminInvoice() {
         laundryAmount,
         pickupDropoffFee,
         totalAmount,
-        items: [],
-        subtotal: laundryAmount,
+  items,
+  subtotal: laundryAmount + otherItemsTotal,
         discount: 0,
         tax: 0,
         total: totalAmount,
@@ -133,7 +142,8 @@ export default function AdminInvoice() {
       </div>
 
       <div className="grid md:grid-cols-3 gap-6 mt-6">
-        <div className="md:col-span-2 card">
+        <div className="md:col-span-2 space-y-6">
+          <section className="card border border-gray-200">
           <h2 className="font-semibold mb-4">Customer Details</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             <input className="rounded-md border px-3 py-2" placeholder="Name" value={clientName} onChange={e=>setClientName(e.target.value)}/>
@@ -141,8 +151,10 @@ export default function AdminInvoice() {
             <input className="rounded-md border px-3 py-2 sm:col-span-2" placeholder="Pickup Location" value={pickupLocation} onChange={e=>setPickupLocation(e.target.value)}/>
             <input className="rounded-md border px-3 py-2 sm:col-span-2" placeholder="Drop-off Location" value={dropoffLocation} onChange={e=>setDropoffLocation(e.target.value)}/>
           </div>
+          </section>
 
-          <h2 className="font-semibold mt-6 mb-2">Service Details</h2>
+          <section className="card border border-gray-200">
+          <h2 className="font-semibold mb-2">Service Details</h2>
           <div className="grid sm:grid-cols-2 gap-4">
             <select className="rounded-md border px-3 py-2" value={serviceType} onChange={e=>setServiceType(e.target.value)}>
               <option>Ordinary Service</option>
@@ -157,14 +169,43 @@ export default function AdminInvoice() {
             <input type="date" className="rounded-md border px-3 py-2" value={pickupDate} onChange={e=>setPickupDate(e.target.value)}/>
             <input type="date" className="rounded-md border px-3 py-2" value={dropoffDate} onChange={e=>setDropoffDate(e.target.value)}/>
           </div>
+          </section>
 
-          <h2 className="font-semibold mt-6 mb-2">Special Instructions</h2>
+          <section className="card border border-gray-200">
+            <h2 className="font-semibold mb-2">Other Services</h2>
+            <p className="text-sm text-gray-600 mb-3">Add any additional services and their prices (e.g., Sneaker cleaning, Suit, Duvet, Dry Cleaning).</p>
+            <div className="space-y-3">
+              {items.map((it, idx) => (
+                <div className="grid grid-cols-12 gap-3" key={idx}>
+                  <input className="col-span-7 rounded-md border px-3 py-2" placeholder="Service name" value={it.name} onChange={e=>{
+                    const next=[...items]; next[idx] = { ...next[idx], name: e.target.value }; setItems(next)
+                  }}/>
+                  <input type="number" className="col-span-4 rounded-md border px-3 py-2" placeholder="Amount (UGX)" value={it.amount} onChange={e=>{
+                    const next=[...items]; next[idx] = { ...next[idx], amount: e.target.value }; setItems(next)
+                  }}/>
+                  <button type="button" className="col-span-1 btn-outline" onClick={()=> setItems(prev => prev.length>1 ? prev.filter((_,i)=>i!==idx) : prev)}>–</button>
+                </div>
+              ))}
+              <div>
+                <button type="button" className="btn-outline" onClick={()=> setItems(prev => [...prev, { name: '', amount: 0 }])}>+ Add service</button>
+              </div>
+              <div className="text-sm text-gray-700 flex items-center justify-between"><span>Other services total</span><span className="font-medium">{otherItemsTotal.toLocaleString('en-UG')}</span></div>
+            </div>
+          </section>
+
+          <section className="card border border-gray-200">
+          <h2 className="font-semibold mb-2">Special Instructions</h2>
           <textarea className="w-full rounded-md border px-3 py-2" rows="3" value={specialInstructions} onChange={e=>setSpecialInstructions(e.target.value)} placeholder="Any notes for garment care, detergent or softener preferences, delicate handling, etc."/>
+          </section>
 
-          <h2 className="font-semibold mt-6 mb-2">Cost Summary</h2>
+          <section className="card border border-gray-200">
+          <h2 className="font-semibold mb-2">Cost Summary</h2>
           <div className="grid sm:grid-cols-3 gap-4">
             <label className="text-sm text-gray-700 flex items-center justify-between gap-2">Laundry Amount
               <input disabled className="ml-3 w-40 rounded-md border px-3 py-2 bg-gray-50" value={laundryAmount.toLocaleString('en-UG')} />
+            </label>
+            <label className="text-sm text-gray-700 flex items-center justify-between gap-2">Other services total
+              <input disabled className="ml-3 w-40 rounded-md border px-3 py-2 bg-gray-50" value={otherItemsTotal.toLocaleString('en-UG')} />
             </label>
             <label className="text-sm text-gray-700 flex items-center justify-between gap-2">Pick up & drop off fee
               <input type="number" className="ml-3 w-40 rounded-md border px-3 py-2" value={pickupDropoffFee} onChange={e=>setPickupDropoffFee(e.target.value)}/>
@@ -173,8 +214,10 @@ export default function AdminInvoice() {
               <input disabled className="ml-3 w-40 rounded-md border px-3 py-2 bg-gray-50" value={totalAmount.toLocaleString('en-UG')} />
             </label>
           </div>
+          </section>
 
-          <div className="grid sm:grid-cols-3 gap-3 mt-6">
+          <section className="card border border-gray-200">
+          <div className="grid sm:grid-cols-3 gap-3">
             <label className="text-sm text-gray-700 flex items-center gap-2">Invoice Date
               <input type="date" className="ml-auto rounded-md border px-2 py-1" value={invoiceDate} onChange={e=>setInvoiceDate(e.target.value)}/>
             </label>
@@ -183,12 +226,14 @@ export default function AdminInvoice() {
             </label>
             <button className="btn-outline h-9 mt-6" onClick={()=>setInvoiceNumber(generateInvoiceNumber())}>New Number</button>
           </div>
+          </section>
         </div>
 
-        <div className="card h-fit">
+        <div className="card h-fit border border-gray-200">
           <h2 className="font-semibold mb-4">Actions</h2>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between"><span>Laundry</span><span>{laundryAmount.toLocaleString('en-UG')}</span></div>
+            {otherItemsTotal > 0 && <div className="flex justify-between"><span>Other services</span><span>{otherItemsTotal.toLocaleString('en-UG')}</span></div>}
             <div className="flex justify-between"><span>Pick up & drop off</span><span>{Number(pickupDropoffFee||0).toLocaleString('en-UG')}</span></div>
             <div className="border-t pt-2 flex justify-between font-semibold"><span>Total</span><span>{totalAmount.toLocaleString('en-UG')}</span></div>
           </div>
