@@ -1,0 +1,159 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* Base layer: CSS variables and element-level defaults */
+@layer base {
+  :root {
+    --bg: #f8fafc; /* gray-50 */
+    --text: #1f2937; /* gray-800 */
+    --brand: #14b8a6; /* teal-500 */
+  --brand-dark: #0d9488; /* teal-600 (for hover) */
+  }
+
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+  }
+}
+
+/* Components layer: reusable class-based styles */
+@layer components {
+  .container-max {
+    max-width: 80rem; /* 7xl */
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem; /* px-4 */
+  }
+  @media (min-width: 640px) { /* sm */
+    .container-max { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+  @media (min-width: 1024px) { /* lg */
+    .container-max { padding-left: 2rem; padding-right: 2rem; }
+  }
+
+  .card {
+    background-color: #ffffff;
+    border-radius: 1rem; /* rounded-xl (config uses 1rem) */
+    box-shadow: 0 10px 25px -10px rgba(0,0,0,0.1); /* shadow-soft */
+    padding: 1.5rem; /* p-6 */
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem; /* gap-2 */
+    border-radius: 0.5rem; /* rounded-lg */
+    background-color: var(--brand);
+    color: #ffffff;
+    padding: 0.75rem 1.25rem; /* py-3 px-5 */
+    font-weight: 500; /* font-medium */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 1px 1px rgba(0,0,0,0.04);
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary:hover {
+    background-color: var(--brand-dark);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem; /* gap-2 */
+    border-radius: 0.5rem; /* rounded-lg */
+    border: 1px solid var(--brand);
+    color: var(--brand);
+    background-color: transparent;
+    padding: 0.75rem 1.25rem; /* py-3 px-5 */
+    font-weight: 500; /* font-medium */
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+  }
+  .btn-outline:hover {
+    background-color: rgba(20, 184, 166, 0.10); /* brand/10 */
+  }
+
+  /* Prose styling for blog content */
+  .prose {
+    color: #374151;
+    max-width: none;
+  }
+
+  .prose h1 {
+    color: #111827;
+    font-weight: 800;
+    font-size: 2.25rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .prose h2 {
+    color: #111827;
+    font-weight: 700;
+    font-size: 1.875rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .prose h3 {
+    color: #111827;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .prose p {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+  }
+
+  .prose li {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .prose strong {
+    color: #111827;
+    font-weight: 600;
+  }
+}
+
+/* Floating button animation keyframes (top-level) */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Utilities layer: small, single-purpose classes */
+@layer utilities {
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Line clamp utilities */
+  .line-clamp-2 {
+  line-clamp: 2;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+  line-clamp: 3;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

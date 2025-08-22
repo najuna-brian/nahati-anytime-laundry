@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Optional: functions directory (already set in Netlify UI). Keep for consistency.
+functions = "netlify/functions"
+
+# SPA routing: send all routes to index.html (React Router)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
