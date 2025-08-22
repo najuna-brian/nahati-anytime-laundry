@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import ServiceCard from '../components/ServiceCard'
 import { SERVICES } from '../utils/constants'
 import InstallPWA from '../components/InstallPWA'
+import BigInstallButton from '../components/BigInstallButton'
 
 export default function Home() {
   const coreNames = new Set(['Ordinary Service', 'Normal Service', 'Express Service'])
@@ -20,9 +21,10 @@ export default function Home() {
             <span className="inline-flex items-center rounded-full bg-brand/10 text-brand px-3 py-1 text-sm font-medium">Your Anytime Laundry</span>
             <h1 className="mt-3 text-3xl sm:text-5xl font-extrabold tracking-tight text-gray-900">Professional Laundry Services Made Simple</h1>
             <p className="mt-4 text-lg text-gray-700">Fast, reliable, and professional care for your garments. 24/7 pickup and delivery available every day.</p>
-            <div className="mt-6 flex gap-3">
+            <div className="mt-6 flex flex-wrap gap-3 items-center">
               <Link to="/booking" className="btn-primary">Schedule Pickup Now</Link>
               <Link to="/services" className="btn-outline">View Services</Link>
+              <BigInstallButton className="ml-1" />
             </div>
           </motion.div>
           <motion.div initial={{opacity:0, scale:0.98}} whileInView={{opacity:1, scale:1}} viewport={{once:true}} transition={{duration:0.5, delay:0.1}} className="relative">
