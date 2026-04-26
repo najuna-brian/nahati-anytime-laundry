@@ -1,55 +1,52 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { blogPosts } from '../components/BlogPost'
 
 export default function BlogDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const post = blogPosts.find(p => p.id === id)
+  const post = blogPosts.find((p) => p.id === id)
 
   if (!post) {
     return (
-      <div className="container-max py-12 text-center">
-        <h1 className="text-2xl font-bold">Article not found</h1>
-        <button onClick={() => navigate('/learn')} className="btn-primary mt-4">
+      <div className="container-max py-16 text-center">
+        <h1 className="font-display text-2xl font-bold text-ink-900">Article not found</h1>
+        <p className="mt-2 text-slate-600">That link may be out of date.</p>
+        <Link to="/learn" className="btn-primary mt-6 inline-flex">
           Back to Learn
-        </button>
+        </Link>
       </div>
     )
   }
 
   return (
-    <div className="container-max py-12 max-w-4xl">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+    <div className="container-max max-w-4xl py-12 sm:py-16">
+      <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
         <div className="mb-6">
           <button
+            type="button"
             onClick={() => navigate('/learn')}
-            className="inline-flex items-center text-brand hover:text-brand-dark mb-4"
+            className="mb-4 inline-flex items-center text-sm font-semibold text-brand-dark hover:underline"
           >
             ← Back to Learn
           </button>
-          
-          <div className="flex items-center gap-3 mb-4">
-            <span className="inline-block px-3 py-1 text-sm font-medium bg-brand/10 text-brand rounded-full">
+
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <span className="inline-block rounded-full bg-brand/10 px-3 py-1 text-sm font-semibold text-brand-dark">
               {post.category}
             </span>
-            <span className="text-gray-500 text-sm">{post.date}</span>
-            <span className="text-gray-500 text-sm">•</span>
-            <span className="text-gray-500 text-sm">{post.readTime}</span>
+            <span className="text-sm text-slate-500">{post.date}</span>
+            <span className="text-sm text-slate-400">·</span>
+            <span className="text-sm text-slate-500">{post.readTime}</span>
           </div>
         </div>
 
-        <article className="prose prose-lg prose-brand max-w-none">
-          <div 
-            dangerouslySetInnerHTML={{ 
+        <article className="prose prose-lg max-w-none">
+          <div
+            dangerouslySetInnerHTML={{
               __html: post.content
                 .split('\n')
-                .map(line => {
+                .map((line) => {
                   if (line.startsWith('# ')) return `<h1>${line.slice(2)}</h1>`
                   if (line.startsWith('## ')) return `<h2>${line.slice(3)}</h2>`
                   if (line.startsWith('### ')) return `<h3>${line.slice(4)}</h3>`
@@ -65,31 +62,23 @@ export default function BlogDetail() {
                   if (line.trim() === '') return '<br>'
                   return `<p>${line}</p>`
                 })
-                .join('')
+                .join(''),
             }}
           />
         </article>
 
-        <div className="mt-12 pt-8 border-t border-gray-200">
-          <div className="bg-brand/5 rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-2">Need Professional Help?</h3>
-            <p className="text-gray-700 mb-4">
-              Let Nahati Anytime Laundry handle your garment care with our professional expertise.
+        <div className="mt-12 border-t border-slate-200 pt-8">
+          <div className="rounded-2xl border border-brand/20 bg-brand/5 p-6 sm:p-8">
+            <h3 className="font-display text-lg font-bold text-ink-900">Want us to do the wash?</h3>
+            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+              Send a booking with your address and service—we confirm weight and price on WhatsApp before we collect anything.
             </p>
-            <div className="flex gap-3">
-              <button
-                onClick={() => navigate('/booking')}
-                className="btn-primary"
-              >
-                Schedule Pickup
-              </button>
-              <a
-                href="https://wa.me/256200981445"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline"
-              >
-                Ask Questions
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link to="/booking" className="btn-primary">
+                Book a pickup
+              </Link>
+              <a href="https://wa.me/256200981445" target="_blank" rel="noopener noreferrer" className="btn-outline">
+                Message on WhatsApp
               </a>
             </div>
           </div>

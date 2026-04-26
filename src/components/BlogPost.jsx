@@ -30,7 +30,7 @@ Proper sorting is the foundation of excellent laundry care. Here's how professio
 
 Remember: Taking an extra 5 minutes to sort properly can add years to your clothes' lifespan!
     `,
-    date: 'August 20, 2025',
+    date: 'February 4, 2026',
     readTime: '3 min read',
     category: 'Laundry Care'
   },
@@ -74,7 +74,7 @@ Time is critical when dealing with stains. Here's your emergency action plan:
 
 When in doubt, do minimal treatment and let our professionals handle it. We have specialized equipment and techniques for every type of stain!
     `,
-    date: 'August 19, 2025',
+    date: 'February 2, 2026',
     readTime: '4 min read',
     category: 'Stain Care'
   },
@@ -119,7 +119,7 @@ Those little symbols on your clothes aren't just decoration – they're your gui
 
 At Nahati, we're experts in reading these labels and treating each garment according to its specific needs. Trust us to decode the mystery and keep your clothes looking their best!
     `,
-    date: 'August 18, 2025',
+    date: 'January 28, 2026',
     readTime: '5 min read',
     category: 'Fabric Care'
   },
@@ -175,7 +175,7 @@ Proper seasonal storage prevents damage and keeps your clothes ready for next se
 
 Let Nahati handle your seasonal wardrobe transitions with our professional cleaning and storage preparation services!
     `,
-    date: 'August 17, 2025',
+    date: 'January 22, 2026',
     readTime: '6 min read',
     category: 'Seasonal Care'
   }
@@ -190,26 +190,26 @@ export default function BlogPost({ title, excerpt, date, readTime, category, onR
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className="card group cursor-pointer"
+      className="card group cursor-pointer rounded-2xl transition-shadow hover:shadow-glow-sm"
       onClick={onReadMore}
     >
-      <div className="flex items-start justify-between mb-3">
-        <span className="inline-block px-3 py-1 text-xs font-medium bg-brand/10 text-brand rounded-full">
+      <div className="mb-3 flex items-start justify-between gap-2">
+        <span className="inline-block rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold text-brand-dark">
           {category}
         </span>
-        <span className="text-xs text-gray-500">{readTime}</span>
+        <span className="shrink-0 text-xs text-slate-500">{readTime}</span>
       </div>
-      
-      <h3 className="text-lg font-semibold text-gray-900 group-hover:text-brand transition-colors line-clamp-2">
+
+      <h3 className="font-display text-lg font-bold text-ink-900 transition-colors group-hover:text-brand-dark line-clamp-2">
         {title}
       </h3>
-      
-      <p className="mt-2 text-gray-700 text-sm line-clamp-3">{excerpt}</p>
-      
+
+      <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-slate-600">{excerpt}</p>
+
       <div className="mt-4 flex items-center justify-between">
-        <span className="text-xs text-gray-500">{date}</span>
-        <motion.span 
-          className="text-brand text-sm font-medium group-hover:translate-x-1 transition-transform"
+        <span className="text-xs text-slate-500">{date}</span>
+        <motion.span
+          className="text-sm font-semibold text-brand-dark transition-transform group-hover:translate-x-1"
           whileHover={{ x: 4 }}
         >
           Read more →

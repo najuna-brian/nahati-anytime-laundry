@@ -1,45 +1,45 @@
-export const WHATSAPP_NUMBER = '256200981445' // Use international format without plus for wa.me
+export const WHATSAPP_NUMBER = '256200981445' // International format without + for wa.me
 
 export const SERVICES = [
   {
     name: 'Ordinary Service',
-    price: '4,000 UGX/Kg',
-    description: '2 days, not pressed',
-    features: ['2-day turnaround', 'No pressing included']
+    price: '4,000 UGX/kg',
+    description: 'Two-day turnaround: washed and folded. Pressing not included.',
+    features: ['Two-day turnaround', 'Washed and folded', 'No pressing'],
   },
   {
     name: 'Normal Service',
-    price: '5,000 UGX/Kg',
-    description: 'Next-day delivery, lightly pressed',
-    features: ['Next-day delivery', 'Light pressing']
+    price: '5,000 UGX/kg',
+    description: 'Next-day return with light pressing.',
+    features: ['Next-day delivery', 'Light pressing included'],
   },
   {
     name: 'Express Service',
-    price: '8,000 UGX/Kg',
-    description: 'Same-day delivery, pressed',
-    features: ['Same-day delivery', 'Pressed']
+    price: '8,000 UGX/kg',
+    description: 'Same-day service when you need it back fast, with pressing.',
+    features: ['Same-day delivery', 'Pressed finish'],
   },
   {
     name: 'Sneaker Cleaning',
     price: '5,000 UGX per pair',
-    description: 'Deep clean and refresh for sneakers',
-    features: ['Per pair pricing', 'Stain and odor treatment']
+    description: 'Deep clean and refresh for trainers and casual shoes.',
+    features: ['Per pair pricing', 'Stain and odour treatment'],
   },
   {
     name: 'Suit Cleaning',
     price: '15,000 UGX',
-    description: 'Professional suit cleaning and light press',
-    features: ['Gentle care', 'Maintain fabric structure']
+    description: 'Careful cleaning and light press for suits and formal wear.',
+    features: ['Gentle process', 'Shape retained'],
   },
   {
     name: 'Duvet / Blanket',
     price: '15,000–30,000 UGX',
-    description: 'Price depends on size; default 15,000 for estimates',
-    features: ['Thorough clean', 'Size-based pricing']
+    description: 'Price by size; we confirm before we start.',
+    features: ['Thorough clean', 'Size-based quote'],
   },
 ]
 
 export const ADDONS = {
   ironing: '1,000 UGX per piece',
-  transport: '2,000–2,500 UGX per KM',
+  transport: '2,000–2,500 UGX per km',
 }

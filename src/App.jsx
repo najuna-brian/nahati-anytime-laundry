@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import FloatingButtons from './components/FloatingButtons'
+import CursorAura from './components/CursorAura'
 import Home from './pages/Home'
 import Services from './pages/Services'
 import Booking from './pages/Booking'
@@ -13,9 +14,9 @@ import AdminInvoice from './pages/AdminInvoice'
 import InstallOnIPhone from './pages/InstallOnIPhone'
 
 const pageVariants = {
-  initial: { opacity: 0, y: 10 },
+  initial: { opacity: 0, y: 12 },
   in: { opacity: 1, y: 0 },
-  out: { opacity: 0, y: -10 },
+  out: { opacity: 0, y: -8 },
 }
 
 function PageWrapper({ children }) {
@@ -25,7 +26,7 @@ function PageWrapper({ children }) {
       initial="initial"
       animate="in"
       exit="out"
-      transition={{ duration: 0.25, ease: 'easeInOut' }}
+      transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
       className="min-h-[70vh]"
     >
       {children}
@@ -35,25 +36,91 @@ function PageWrapper({ children }) {
 
 export default function App() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
-      <div className="flex-1">
-        <AnimatePresence mode="wait">
-          <Routes>
-            <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-            <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
-            <Route path="/booking" element={<PageWrapper><Booking /></PageWrapper>} />
-            <Route path="/learn" element={<PageWrapper><Learn /></PageWrapper>} />
-            <Route path="/learn/:id" element={<PageWrapper><BlogDetail /></PageWrapper>} />
-            <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
-            <Route path="/install/iphone" element={<PageWrapper><InstallOnIPhone /></PageWrapper>} />
-            <Route path="/admin/invoice" element={<PageWrapper><AdminInvoice /></PageWrapper>} />
-            <Route path="*" element={<PageWrapper><Home /></PageWrapper>} />
-          </Routes>
-        </AnimatePresence>
+    <div className="relative flex min-h-screen flex-col">
+      <CursorAura />
+      <div className="relative z-10 flex min-h-screen flex-col">
+        <Navbar />
+        <div className="flex-1">
+          <AnimatePresence mode="wait">
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <PageWrapper>
+                    <Home />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/services"
+                element={
+                  <PageWrapper>
+                    <Services />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/booking"
+                element={
+                  <PageWrapper>
+                    <Booking />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/learn"
+                element={
+                  <PageWrapper>
+                    <Learn />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/learn/:id"
+                element={
+                  <PageWrapper>
+                    <BlogDetail />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/contact"
+                element={
+                  <PageWrapper>
+                    <Contact />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/install/iphone"
+                element={
+                  <PageWrapper>
+                    <InstallOnIPhone />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="/admin/invoice"
+                element={
+                  <PageWrapper>
+                    <AdminInvoice />
+                  </PageWrapper>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <PageWrapper>
+                    <Home />
+                  </PageWrapper>
+                }
+              />
+            </Routes>
+          </AnimatePresence>
+        </div>
+        <Footer />
+        <FloatingButtons />
       </div>
-      <Footer />
-      <FloatingButtons />
     </div>
   )
 }

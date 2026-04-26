@@ -31,13 +31,15 @@ export default function InstallPWA({ className = '' }) {
   if (!canInstall || isIOS) return null
 
   return (
-    <div className={`rounded-lg border border-gray-200 bg-white p-4 shadow-sm ${className}`}>
-      <div className="flex items-center justify-between gap-3">
+    <div className={`rounded-2xl border border-slate-200/90 bg-white/80 p-5 shadow-soft backdrop-blur-sm ${className}`}>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h3 className="font-semibold">Get the app</h3>
-          <p className="text-sm text-gray-600">Install Nahati on your device for a faster, app-like experience.</p>
+          <h3 className="font-display font-bold text-ink-900">Get the app</h3>
+          <p className="mt-1 text-sm text-slate-600">Install Nahati on your device for a faster, app-like experience.</p>
         </div>
-        <button onClick={onInstall} className="btn-primary">Install</button>
+        <button type="button" onClick={onInstall} className="btn-primary shrink-0 text-sm">
+          Install
+        </button>
       </div>
     </div>
   )

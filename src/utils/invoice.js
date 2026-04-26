@@ -1,6 +1,7 @@
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import dayjs from 'dayjs'
+import { publicUrl } from './publicUrl'
 
 export function ugx(n) {
   const val = Number(n || 0)
@@ -43,7 +44,7 @@ export async function createInvoicePdf({ business, invoice }) {
   const brandRGB = [brand.r, brand.g, brand.b]
 
   // Header
-  const logo = await fetchImageAsDataURL('/nahati_logo.png')
+  const logo = await fetchImageAsDataURL(publicUrl('nahati_logo.png'))
   if (logo) {
     try { doc.addImage(logo, 'PNG', margin, y - 6, 64, 64) } catch {}
   }

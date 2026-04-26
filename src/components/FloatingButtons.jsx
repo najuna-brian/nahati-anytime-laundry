@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function FloatingButtons() {
+  const navigate = useNavigate()
   const [showTooltips, setShowTooltips] = useState({ whatsapp: false, pickup: false })
 
   const handleWhatsApp = () => {
@@ -9,7 +11,7 @@ export default function FloatingButtons() {
   }
 
   const handlePickup = () => {
-    window.location.href = '/booking'
+    navigate('/booking')
   }
 
   return (
@@ -26,15 +28,16 @@ export default function FloatingButtons() {
           <motion.div
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
-            className="absolute right-16 top-1/2 -translate-y-1/2 bg-gray-900 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap"
+            className="absolute right-16 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-lg border border-white/10 bg-ink-900 px-3 py-1.5 text-sm font-medium text-white shadow-lg"
           >
             Schedule Pickup
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-2 h-2 bg-gray-900 rotate-45"></div>
+            <div className="absolute right-0 top-1/2 h-2 w-2 translate-x-1 -translate-y-1/2 rotate-45 bg-ink-900" />
           </motion.div>
         )}
         <button
+          type="button"
           onClick={handlePickup}
-          className="bg-brand hover:bg-brand-dark text-white p-4 rounded-full shadow-lg transition-all duration-200 flex items-center gap-2"
+          className="flex items-center gap-2 rounded-full bg-gradient-to-br from-brand to-teal-600 p-4 text-ink-950 shadow-glow transition hover:brightness-105"
           aria-label="Schedule Pickup"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -55,15 +58,16 @@ export default function FloatingButtons() {
           <motion.div
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
-            className="absolute right-16 top-1/2 -translate-y-1/2 bg-gray-900 text-white px-3 py-1 rounded-lg text-sm whitespace-nowrap"
+            className="absolute right-16 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-lg border border-white/10 bg-ink-900 px-3 py-1.5 text-sm font-medium text-white shadow-lg"
           >
             Chat on WhatsApp
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 w-2 h-2 bg-gray-900 rotate-45"></div>
+            <div className="absolute right-0 top-1/2 h-2 w-2 translate-x-1 -translate-y-1/2 rotate-45 bg-ink-900" />
           </motion.div>
         )}
         <button
+          type="button"
           onClick={handleWhatsApp}
-          className="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all duration-200"
+          className="rounded-full bg-gradient-to-br from-emerald-500 to-green-600 p-4 text-white shadow-lg transition hover:brightness-105"
           aria-label="Chat on WhatsApp"
         >
           <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
