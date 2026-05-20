@@ -9,7 +9,8 @@ export default function AdminInvoice() {
   const [clientPhone, setClientPhone] = useState('')
   const [pickupLocation, setPickupLocation] = useState('')
   const [dropoffLocation, setDropoffLocation] = useState('')
-
+  const [discountInput, setDiscountInput] = useState(""); // The % the user types
+  
   // Service details
   const [serviceType, setServiceType] = useState('Express Service')
   const [weightKg, setWeightKg] = useState(0)
@@ -43,14 +44,21 @@ export default function AdminInvoice() {
   )
 
   async function handleGenerate() {
-    setSaving(true)
+    setSaving(true);
     try {
+      // 1. Calculations
+      const dPercent = parseFloat(discountInput || 0); 
+      const currentSubtotal = Number(laundryAmount || 0) + Number(otherItemsTotal || 0);
+      const totalBeforeDiscount = currentSubtotal + Number(pickupDropoffFee || 0);
+      const discAmount = totalBeforeDiscount * (dPercent / 100);
+      const calculatedTotal = totalBeforeDiscount - discAmount;
+
       const business = {
         name: 'Nahati Anytime Laundry',
         tagline: 'Your Anytime Laundry',
         phone: '+256 200 981 445',
         address: 'Kampala, Uganda',
-      }
+      };
 
       const invoice = {
         number: invoiceNumber,
@@ -69,15 +77,18 @@ export default function AdminInvoice() {
         pickupDropoffFee,
         items,
         otherItemsTotal,
-        totalAmount,
-      }
+        totalAmount: calculatedTotal,
+        discountPercent: dPercent,
+        discountAmount: discAmount,
+      };
 
-      const pdf = await createInvoicePdf({ business, invoice })
-      const fileName = invoiceFileName(clientName, invoiceDate)
-      pdf.save(fileName)
+      // 2. Generate PDF
+      const pdf = await createInvoicePdf({ business, invoice });
+      const fileName = invoiceFileName(clientName, invoiceDate);
+      pdf.save(fileName);
 
-      // Store to Google Sheets via Invoices form
-      void submitInvoiceToGoogleForms({
+      // 3. Store to Google Sheets (Moved inside the try block)
+      await submitInvoiceToGoogleForms({
         number: invoiceNumber,
         date: invoiceDate,
         createdAtISO: new Date().toISOString(),
@@ -93,18 +104,24 @@ export default function AdminInvoice() {
         specialInstructions,
         laundryAmount,
         pickupDropoffFee,
-        totalAmount,
-  items,
-  subtotal: laundryAmount + otherItemsTotal,
-        discount: 0,
+        totalAmount: calculatedTotal,
+        items,
+        subtotal: currentSubtotal,
+        discount: discAmount,
         tax: 0,
-        total: totalAmount,
+        total: calculatedTotal,
         notes: specialInstructions,
-      })
+      });
+
+      alert("✅ Invoice Saved & Sent to Sheets!");
+
+    } catch (error) {
+      console.error("Generation Error:", error);
+      alert("Error: " + error.message);
     } finally {
-      setSaving(false)
+      setSaving(false);
     }
-  }
+  } // <--- Only ONE closing bracket now!
 
   return (
     <div className="container-max py-10">
@@ -164,7 +181,7 @@ export default function AdminInvoice() {
               <div className="text-sm text-gray-700 flex items-center justify-between"><span>Other services total</span><span className="font-medium">{otherItemsTotal.toLocaleString('en-UG')}</span></div>
             </div>
           </section>
-
+          
           <section className="card border border-gray-200">
           <h2 className="font-semibold mb-2">Special Instructions</h2>
           <textarea className="w-full rounded-md border px-3 py-2" rows="3" value={specialInstructions} onChange={e=>setSpecialInstructions(e.target.value)} placeholder="Any notes for garment care, detergent or softener preferences, delicate handling, etc."/>
@@ -181,6 +198,16 @@ export default function AdminInvoice() {
             </label>
             <label className="text-sm text-gray-700 flex items-center justify-between gap-2">Pick up & drop off fee
               <input type="number" className="ml-3 w-40 rounded-md border px-3 py-2" value={pickupDropoffFee} onChange={e=>setPickupDropoffFee(e.target.value)}/>
+            </label>
+            <label className="text-sm text-gray-700 flex items-center justify-between gap-2">
+              Discount (%)
+              <input 
+                type="number" 
+                className="ml-3 w-40 rounded-md border px-3 py-2 text-black" 
+                placeholder="0"
+                value={discountInput} 
+                onChange={e => setDiscountInput(e.target.value)}
+              />
             </label>
             <label className="text-sm text-gray-700 flex items-center justify-between gap-2">Total Amount
               <input disabled className="ml-3 w-40 rounded-md border px-3 py-2 bg-gray-50" value={totalAmount.toLocaleString('en-UG')} />
@@ -208,7 +235,27 @@ export default function AdminInvoice() {
             {otherItemsTotal > 0 && <div className="flex justify-between"><span>Other services</span><span>{otherItemsTotal.toLocaleString('en-UG')}</span></div>}
             <div className="flex justify-between"><span>Pick up & drop off</span><span>{Number(pickupDropoffFee||0).toLocaleString('en-UG')}</span></div>
             <div className="border-t pt-2 flex justify-between font-semibold"><span>Total</span><span>{totalAmount.toLocaleString('en-UG')}</span></div>
-          </div>
+            <div className="mt-6 p-4 bg-[#f0fdfa] rounded-xl border border-[#99f6e4]">
+            <div className="flex justify-between text-sm text-gray-600">
+               <span>Subtotal:</span>
+               <span>{ (Number(laundryAmount) + Number(otherItemsTotal)).toLocaleString() } UGX</span>
+            </div>
+            <div className="flex justify-between text-gray-500 font-medium">
+               <span>Discount ({discountInput || 0}%):</span>
+               <span>- { ((Number(laundryAmount) + Number(otherItemsTotal)) * (parseFloat(discountInput || 0) / 100)).toLocaleString() } UGX</span>
+            </div>
+            <hr className="my-2 border-gray-200" />
+            <div className="flex justify-between text-lg font-bold text-[#0d9488]">
+               <span>Grand Total:</span>
+               <span>
+                 { (
+                   (Number(laundryAmount) + Number(otherItemsTotal) + Number(pickupDropoffFee)) - 
+                   ((Number(laundryAmount) + Number(otherItemsTotal) + Number(pickupDropoffFee)) * (parseFloat(discountInput || 0) / 100))
+                 ).toLocaleString() } UGX
+               </span>
+             </div>
+            </div>
+        </div>
           <button className="btn-primary mt-4 w-full" onClick={handleGenerate} disabled={saving}>
             {saving ? 'Generating…' : 'Download Invoice & Save'}
           </button>
